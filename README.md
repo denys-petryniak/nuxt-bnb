@@ -1,2 +1,1 @@
 # NuxtBnB
-# NuxtBnB
