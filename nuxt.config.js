@@ -1,27 +1,27 @@
 export default {
-	components: true,
+  components: true,
 
-	head: {
-		titleTemplate: 'NuxtBnB: %s',
+  head: {
+    titleTemplate: "NuxtBnB: %s",
 
-		htmlAttrs: {
-			lang: 'en'
-		},
+    htmlAttrs: {
+      lang: "en",
+    },
 
-		bodyAttrs: {
-			class: ['my-style']
-		},
+    bodyAttrs: {
+      class: ["my-style"],
+    },
 
-		meta: [
-			{
-				charset: 'utf-8'
-			}
-		]
-	},
+    meta: [
+      {
+        charset: "utf-8",
+      },
+    ],
+  },
 
-	router: {
-		prefetchLinks: false
-	},
+  router: {
+    prefetchLinks: false,
+  },
 
-	plugins: [ '~/plugins/maps.client' ]
-} 
+  plugins: ["~/plugins/maps.client", "~/plugins/dataApi"],
+};

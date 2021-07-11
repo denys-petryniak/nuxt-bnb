@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import homes from "~/data/homes";
-
 export default {
   head() {
     return {
@@ -24,15 +22,12 @@ export default {
     };
   },
 
-  data() {
-    return {
-      home: {},
-    };
-  },
+  async asyncData({ params, $dataApi }) {
+    const home = await $dataApi.getHome(params.id);
 
-  created() {
-    const home = homes.find(home => home.objectID == this.$route.params.id);
-    this.home = home;
+    return {
+      home,
+    };
   },
 
   mounted() {
