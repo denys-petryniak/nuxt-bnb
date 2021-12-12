@@ -22,11 +22,18 @@ export default {
     };
   },
 
-  async asyncData({ params, $dataApi }) {
-    const home = await $dataApi.getHome(params.id);
+  async asyncData({ params, $dataApi, error }) {
+    const response = await $dataApi.getHome(params.id);
+
+    if (!response.ok) {
+      return error({
+        statusCode: response.status,
+        message: response.statusText,
+      });
+    }
 
     return {
-      home,
+      home: response.json,
     };
   },
 
