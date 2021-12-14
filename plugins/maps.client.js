@@ -1,6 +1,6 @@
-export default (context, inject) => {
-  let mapLoaded = false;
-  let mapWaiting = null;
+export default (_, inject) => {
+  let isLoaded = false;
+  let waiting = [];
 
   addScript();
   inject("maps", {
@@ -10,31 +10,33 @@ export default (context, inject) => {
   function addScript() {
     const script = document.createElement("script");
     script.src =
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjQkj7VxkH8KtsmTl4MVoTva7TqnM6NUo&libraries=places&callback=initMap";
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjQkj7VxkH8KtsmTl4MVoTva7TqnM6NUo&libraries=places&callback=initGoogleMaps";
     script.async = true;
-    window.initMap = initMap;
+    window.initGoogleMaps = initGoogleMaps;
     document.head.appendChild(script);
   }
 
-  function initMap() {
-    mapLoaded = true;
+  function initGoogleMaps() {
+    isLoaded = true;
 
-    if (mapWaiting) {
-      const { canvas, lat, lng } = mapWaiting;
-      renderMap(canvas, lat, lng);
-      mapWaiting = null;
-    }
+    waiting.forEach(item => {
+      if (typeof item.fn === "function") {
+        item.fn(...item.arguments);
+      }
+    });
+
+    waiting = [];
   }
 
   function showMap(canvas, lat, lng) {
-    if (mapLoaded) {
-      renderMap(canvas, lat, lng);
-    } else {
-      mapWaiting = { canvas, lat, lng };
+    if (!isLoaded) {
+      waiting.push({
+        fn: showMap,
+        arguments,
+      });
+      return;
     }
-  }
 
-  function renderMap(canvas, lat, lng) {
     const mapOptions = {
       zoom: 18,
       center: new window.google.maps.LatLng(lat, lng),
