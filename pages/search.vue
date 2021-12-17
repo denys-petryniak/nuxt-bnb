@@ -3,7 +3,9 @@
     Results for {{ label }} <br />
     <div style="height:800px;width:800px;float:right;" ref="map"></div>
     <div v-if="homes.length > 0">
-      <HomeRow v-for="home in homes" :key="home.objectID" :home="home" />
+      <nuxt-link v-for="home in homes" :key="home.objectID" :to="`/home/${home.objectID}`">
+        <HomeRow :home="home" />
+      </nuxt-link>
     </div>
     <div v-else>
       No results found
@@ -48,7 +50,15 @@ export default {
 
   methods: {
     updateMap() {
-      this.$maps.showMap(this.$refs.map, this.lat, this.lng);
+      this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers());
+    },
+
+    getHomeMarkers() {
+      return this.homes.map(home => {
+        return {
+          ...home._geoloc,
+        };
+      });
     },
   },
 };
