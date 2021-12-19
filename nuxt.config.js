@@ -25,5 +25,5 @@ export default {
 
   plugins: ["~/plugins/maps.client", "~/plugins/dataApi"],
 
-  modules: [["~/modules/test", { message: "My module!" }]],
+  modules: ["~/modules/test"],
 };
