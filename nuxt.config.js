@@ -25,5 +25,7 @@ export default {
 
   plugins: ["~/plugins/maps.client", "~/plugins/dataApi"],
 
-  modules: ["~/modules/test"],
+  modules: [],
+
+  buildModules: ["@nuxtjs/tailwindcss"],
 };
