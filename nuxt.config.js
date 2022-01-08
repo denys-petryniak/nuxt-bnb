@@ -23,7 +23,7 @@ export default {
     prefetchLinks: false,
   },
 
-  plugins: ["~/plugins/maps.client", "~/plugins/dataApi"],
+  plugins: ["~/plugins/maps.client", "~/plugins/dataApi", "~/plugins/auth.client"],
 
   modules: [],
 
@@ -37,4 +37,13 @@ export default {
       limit: 0,
     },
   },
+
+  publicRuntimeConfig: {
+    auth: {
+      cookieName: "idToken",
+      clientId: "736761392411-pa0sqah7jpgdpsm34a3uk961q0rqbfld.apps.googleusercontent.com",
+    },
+  },
+
+  privateRuntimeConfig: {},
 };
