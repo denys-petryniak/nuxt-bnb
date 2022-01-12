@@ -25,7 +25,7 @@ export default {
 
   plugins: ["~/plugins/maps.client", "~/plugins/dataApi", "~/plugins/auth.client"],
 
-  modules: ["~/modules/auth"],
+  modules: ["~/modules/auth", "~/modules/algolia"],
 
   buildModules: ["@nuxtjs/tailwindcss"],
 
@@ -43,7 +43,16 @@ export default {
       cookieName: "idToken",
       clientId: "736761392411-pa0sqah7jpgdpsm34a3uk961q0rqbfld.apps.googleusercontent.com",
     },
+    algolia: {
+      appId: "HTQ6DUKPLH",
+      key: "e2f285ffa12aabeb7f0e9ff5b326cf27",
+    },
   },
 
-  privateRuntimeConfig: {},
+  privateRuntimeConfig: {
+    algolia: {
+      appId: "HTQ6DUKPLH",
+      key: "686f5e59770cf830fbd3e26cd6ed4c18",
+    },
+  },
 };
