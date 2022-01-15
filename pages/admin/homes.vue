@@ -28,7 +28,7 @@
       <input type="number" v-model="home.bedrooms" class="w-14" />
       <input type="number" v-model="home.beds" class="w-14" />
       <input type="number" v-model="home.bathrooms" class="w-14" /><br />
-      Adress: <input type="text" v-model="home.location.address" class="w-60" /><br />
+      Address: <input type="text" v-model="home.location.address" class="w-60" /><br />
       City: <input type="text" v-model="home.location.city" class="w-26" /><br />
       State: <input type="text" v-model="home.location.state" class="w-26" /><br />
       Postal code: <input type="text" v-model="home.location.postalCode" class="w-26" /><br />
