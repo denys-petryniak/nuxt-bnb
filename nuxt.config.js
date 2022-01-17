@@ -25,7 +25,7 @@ export default {
 
   plugins: ["~/plugins/maps.client", "~/plugins/dataApi", "~/plugins/auth.client"],
 
-  modules: ["~/modules/auth", "~/modules/algolia"],
+  modules: ["~/modules/auth", "~/modules/algolia", "~/modules/cloudinary"],
 
   buildModules: ["@nuxtjs/tailwindcss"],
 
@@ -53,6 +53,9 @@ export default {
     algolia: {
       appId: "HTQ6DUKPLH",
       key: "686f5e59770cf830fbd3e26cd6ed4c18",
+    },
+    cloudinary: {
+      apiSecret: "-y-rDgENfUIs3t3rMHHrnmBCcAg",
     },
   },
 };
