@@ -30,7 +30,7 @@ export default (_, inject) => {
     waiting = [];
   }
 
-  function makeAutoComplete(input) {
+  function makeAutoComplete(input, types = ["(cities)"]) {
     if (!isLoaded) {
       waiting.push({
         fn: makeAutoComplete,
@@ -41,7 +41,7 @@ export default (_, inject) => {
     }
 
     const autoComplete = new window.google.maps.places.Autocomplete(input, {
-      types: ["(cities)"],
+      types,
     });
     autoComplete.addListener("place_changed", () => {
       const place = autoComplete.getPlace();
