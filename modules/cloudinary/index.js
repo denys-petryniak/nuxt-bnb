@@ -4,7 +4,7 @@ export default function() {
   const config = this.options.privateRuntimeConfig.cloudinary;
 
   this.nuxt.hook("render:setupMiddleware", app => {
-    app.use("api/cloudinary/signature", setSignature);
+    app.use("/api/cloudinary/signature", setSignature);
   });
 
   function setSignature(req, res) {
