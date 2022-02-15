@@ -30,7 +30,7 @@ export default {
   buildModules: ["@nuxtjs/tailwindcss"],
 
   cloudinary: {
-    cloudName: "ddi5mq1sr",
+    cloudName: "dlb7sfdnr",
   },
 
   css: ["~/assets/sass/app.scss"],
@@ -52,7 +52,7 @@ export default {
       key: "e2f285ffa12aabeb7f0e9ff5b326cf27",
     },
     cloudinary: {
-      apiKey: "886593714261379",
+      apiKey: "386431866795293",
     },
   },
 
@@ -62,7 +62,7 @@ export default {
       key: "686f5e59770cf830fbd3e26cd6ed4c18",
     },
     cloudinary: {
-      apiSecret: "-y-rDgENfUIs3t3rMHHrnmBCcAg",
+      apiSecret: "WlZzGmY3S2UGhEDQqMYEgdw4J74",
     },
   },
 };
