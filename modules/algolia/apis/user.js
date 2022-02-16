@@ -6,6 +6,13 @@ export default algoliaConfig => {
   const headers = getHeaders(algoliaConfig);
 
   return {
+    assignHome: async function(identity, homeId) {
+      const payload = (await this.getById(identity)).json;
+
+      payload.homeId.push(homeId);
+      this.create(identity, payload);
+    },
+
     create: async (identity, payload) => {
       try {
         return unWrap(
