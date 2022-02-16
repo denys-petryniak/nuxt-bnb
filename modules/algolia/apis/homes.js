@@ -19,5 +19,23 @@ export default algoliaConfig => {
         return getErrorResponse(error);
       }
     },
+
+    getByUserId: async userId => {
+      try {
+        return unWrap(
+          await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/query`, {
+            headers,
+            method: "POST",
+            body: JSON.stringify({
+              filters: `userId:${userId}`,
+              attributesToRetrieve: ["objectId", "title"],
+              attributesToHighlight: [],
+            }),
+          })
+        );
+      } catch (error) {
+        return getErrorResponse(error);
+      }
+    },
   };
 };
