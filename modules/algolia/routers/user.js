@@ -1,7 +1,7 @@
 import { sendJSON } from "../helpers";
 
 export default apis => {
-  return async function getUsetRoute(req, res, next) {
+  return async function getUserRoute(req, res, next) {
     const identity = req.identity;
     const userData = await apis.user.getById(identity);
 

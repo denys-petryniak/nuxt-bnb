@@ -13,6 +13,14 @@ export default algoliaConfig => {
       this.create(identity, payload);
     },
 
+    removeHome: async function(identity, homeId) {
+      const payload = (await this.getById(identity)).json;
+      const homes = payload.homeId.filter(id => id != homeId);
+
+      payload.homeId = homes;
+      this.create(identity, payload);
+    },
+
     create: async (identity, payload) => {
       try {
         return unWrap(
