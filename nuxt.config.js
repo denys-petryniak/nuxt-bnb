@@ -27,10 +27,16 @@ export default {
 
   modules: ["~/modules/auth", "~/modules/algolia", "~/modules/cloudinary", "@nuxtjs/cloudinary"],
 
-  buildModules: ["@nuxtjs/tailwindcss"],
+  buildModules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
 
   cloudinary: {
     cloudName: "dlb7sfdnr",
+  },
+
+  image: {
+    cloudinary: {
+      baseURL: "https://res.cloudinary.com/dlb7sfdnr/image/upload/",
+    },
   },
 
   css: ["~/assets/sass/app.scss"],

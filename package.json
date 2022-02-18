@@ -17,6 +17,7 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
+        "@nuxt/image": "^0.6.2",
         "@nuxtjs/tailwindcss": "^4.2.1",
         "css-loader": "^5.2.7",
         "postcss": "^8.4.5",
