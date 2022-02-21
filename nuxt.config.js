@@ -17,13 +17,15 @@ export default {
         charset: "utf-8",
       },
     ],
+
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
   },
 
   router: {
     prefetchLinks: false,
   },
 
-  plugins: ["~/plugins/maps.client", "~/plugins/dataApi", "~/plugins/auth.client"],
+  plugins: ["~/plugins/maps.client", "~/plugins/dataApi", "~/plugins/auth.client", "~/plugins/vCalendar.client"],
 
   modules: ["~/modules/auth", "~/modules/algolia", "~/modules/cloudinary", "@nuxtjs/cloudinary"],
 
