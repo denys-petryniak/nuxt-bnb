@@ -1,19 +1,19 @@
 import fetch from "node-fetch";
 import { unWrap, getErrorResponse } from "../../../utils/fetchUtils";
-import { getHeaders } from "../helpers";
+import { getHeaders } from "../../helpers";
 
 export default algoliaConfig => {
   const headers = getHeaders(algoliaConfig);
 
   return {
-    assignHome: async function(identity, homeId) {
+    assignHome: async function (identity, homeId) {
       const payload = (await this.getById(identity)).json;
 
       payload.homeId.push(homeId);
       this.create(identity, payload);
     },
 
-    removeHome: async function(identity, homeId) {
+    removeHome: async function (identity, homeId) {
       const payload = (await this.getById(identity)).json;
       const homes = payload.homeId.filter(id => id != homeId);
 
