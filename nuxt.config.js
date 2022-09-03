@@ -25,9 +25,15 @@ export default {
     prefetchLinks: false,
   },
 
-  plugins: ["~/plugins/maps.client", "~/plugins/dataApi", "~/plugins/auth.client", "~/plugins/vCalendar.client"],
+  plugins: [
+    "~/plugins/maps.client",
+    "~/plugins/dataApi",
+    "~/plugins/auth.client",
+    "~/plugins/vCalendar.client",
+    "~/plugins/stripe.client",
+  ],
 
-  modules: ["~/modules/auth", "~/modules/algolia", "~/modules/cloudinary", "@nuxtjs/cloudinary"],
+  modules: ["~/modules/auth", "~/modules/algolia", "~/modules/cloudinary", "~/modules/stripe", "@nuxtjs/cloudinary"],
 
   buildModules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
 
@@ -51,6 +57,7 @@ export default {
   },
 
   publicRuntimeConfig: {
+    rootUrl: process.env.NODE_ENV === "production" ? "https://test.com" : "http://localhost:3000",
     auth: {
       cookieName: "idToken",
       clientId: "736761392411-pa0sqah7jpgdpsm34a3uk961q0rqbfld.apps.googleusercontent.com",
@@ -63,8 +70,7 @@ export default {
       apiKey: "386431866795293",
     },
     stripe: {
-      key:
-        "pk_test_51KWOzoKsFB8ghWoke2qoA9EGIK8VCiaPUlHYf41XOS7OHBGhu1hSvzf1Cbyuob9tAQ8LKur0ShWNmoSazvFcnJsx00wa3nKARr",
+      key: "pk_test_51KWOzoKsFB8ghWoke2qoA9EGIK8VCiaPUlHYf41XOS7OHBGhu1hSvzf1Cbyuob9tAQ8LKur0ShWNmoSazvFcnJsx00wa3nKARr",
     },
   },
 
