@@ -14,6 +14,13 @@ export default function () {
     app.use("/api/stripe/create-session", createSession);
   });
 
+  this.nuxt.hook("render:setupMiddleware", app => {
+    app.use("/hooks/stripe", (req, res, next) => {
+      const meta = req.body.data.object.metadata;
+      res.end(`${meta.identityId} booked ${meta.homeId}!!!!`);
+    });
+  });
+
   async function createSession(req, res) {
     const SECONDS_IN_A_DAY = 86400;
     const body = req.body;
