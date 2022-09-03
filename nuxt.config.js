@@ -57,7 +57,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    rootUrl: process.env.NODE_ENV === "production" ? "https://test.com" : "http://localhost:3000",
+    rootUrl: process.env.NODE_ENV === "production" ? "https://nuxtairbnb.vercel.app" : "http://localhost:3000",
     auth: {
       cookieName: "idToken",
       clientId: "736761392411-pa0sqah7jpgdpsm34a3uk961q0rqbfld.apps.googleusercontent.com",
