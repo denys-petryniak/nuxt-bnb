@@ -77,10 +77,10 @@ export default {
   privateRuntimeConfig: {
     algolia: {
       appId: "HTQ6DUKPLH",
-      key: "686f5e59770cf830fbd3e26cd6ed4c18",
+      key: process.env.ALGOLIA_SECRET_KEY,
     },
     cloudinary: {
-      apiSecret: "WlZzGmY3S2UGhEDQqMYEgdw4J74",
+      apiSecret: process.env.CLOUDINARY_SECRET_KEY,
     },
     stripe: {
       secretKey: process.env.STRIPE_SECRET_KEY,
