@@ -11,6 +11,7 @@
             @mouseout.native="highlightMarker(home.objectID, false)"
           />
         </nuxt-link>
+        <div v-if="homes.length === 0">No homes found, try another city.</div>
       </div>
       <div class="app-search-results-map">
         <div class="app-map" ref="map"></div>
