@@ -63,7 +63,7 @@ export default ({ $config }, inject) => {
     try {
       const days = [];
 
-      for (let day = start; day <= end; day += 86400) {
+      for (let day = parseInt(start); day <= parseInt(end); day += 86400) {
         days.push(`availability:${day}`);
       }
 
