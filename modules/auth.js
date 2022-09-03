@@ -1,7 +1,7 @@
 import cookie from "cookie";
 import { OAuth2Client } from "google-auth-library";
 
-export default function() {
+export default function () {
   const authConfig = this.options.publicRuntimeConfig.auth;
 
   this.nuxt.hook("render:setupMiddleware", app => {
@@ -22,11 +22,7 @@ export default function() {
       return rejectHit(res);
     }
 
-    console.log(req.originalUrl);
-    console.log(idToken);
-
     const ticket = await getUser(idToken);
-    console.log(ticket);
 
     if (!ticket) {
       return rejectHit(res);
