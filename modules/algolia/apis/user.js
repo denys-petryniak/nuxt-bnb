@@ -6,6 +6,25 @@ export default algoliaConfig => {
   const headers = getHeaders(algoliaConfig);
 
   return {
+    bookHome: async (identityId, homeId, start, end) => {
+      try {
+        return unWrap(
+          await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/bookings/`, {
+            headers,
+            method: "POST",
+            body: JSON.stringify({
+              identityId,
+              homeId,
+              start,
+              end,
+            }),
+          })
+        );
+      } catch (error) {
+        return getErrorResponse(error);
+      }
+    },
+
     assignHome: async function (identity, homeId) {
       const payload = (await this.getById(identity)).json;
 
