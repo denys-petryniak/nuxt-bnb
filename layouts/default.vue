@@ -26,7 +26,7 @@
       </div>
       <div class="app-user-menu">
         <template v-if="isLoggedIn">
-          <img :src="user.profileUrl" alt="User avatar" class="avatar" />
+          <img :src="user.profileUrl" alt="User avatar" class="avatar" title="Sign out" @click="$auth.signOut()" />
         </template>
         <div v-show="!isLoggedIn" id="googleButton" class="ml-8"></div>
       </div>

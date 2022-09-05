@@ -103,7 +103,7 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
     }
 
     .avatar {
-      @apply w-12 h-12 rounded-full border-2 border-dodger-blue ml-10;
+      @apply w-12 h-12 rounded-full border-2 border-dodger-blue ml-10 cursor-pointer;
     }
   }
 
