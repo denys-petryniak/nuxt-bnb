@@ -1,13 +1,6 @@
 <template>
   <div>
-    <nuxt-img
-      class="app-house-header"
-      provider="cloudinary"
-      width="360"
-      height="200"
-      :src="home.images[0]"
-      :modifiers="{ effect: 'grayscale', opacity: 50 }"
-    />
+    <nuxt-img class="app-house-header" provider="cloudinary" width="360" height="200" :src="home.images[0]" />
     <div class="app-house-body">
       <h2>{{ home.title }}</h2>
       <div class="app-address">{{ home.location.address }} {{ home.location.city }} {{ home.location.state }}</div>

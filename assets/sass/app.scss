@@ -475,7 +475,7 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
     }
 
     &-map {
-      @apply flex-1;
+      @apply flex-1 border-l-2 border-gray-200;
 
       .app-map {
         @apply h-full;
