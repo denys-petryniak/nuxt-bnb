@@ -1,63 +1,38 @@
 import Cookie from "js-cookie";
-import { unWrap } from "~/utils/fetchUtils";
+import jwt_decode from "jwt-decode";
 
 export default ({ $config, store }, inject) => {
-  window.initAuth = init;
-  addScript();
+  window.auth = response => {
+    try {
+      const token = response.credential;
+      const user = jwt_decode(token);
+      store.commit("auth/user", {
+        fullName: user.name,
+        profileUrl: user.picture,
+      });
 
+      Cookie.set($config.auth.cookieName, token, {
+        expires: 1 / 24,
+        sameSite: "Lax",
+      });
+    } catch (e) {
+      console.log(`JWT Error ${e}`);
+    }
+  };
+  addScript();
   inject("auth", {
     signOut,
   });
 
   function addScript() {
     const script = document.createElement("script");
-    script.src = "https://apis.google.com/js/platform.js?onload=initAuth";
+    script.src = "https://accounts.google.com/gsi/client";
     script.async = true;
     document.head.appendChild(script);
   }
 
-  function init() {
-    window.gapi.load("auth2", async function() {
-      const auth2 = await window.gapi.auth2.init({
-        client_id: $config.auth.clientId,
-      });
-
-      auth2.currentUser.listen(parseUser);
-    });
-
-    window.gapi.signin2.render("googleButton", {
-      onsuccess: parseUser,
-    });
-  }
-
-  async function parseUser(user) {
-    if (!user.isSignedIn()) {
-      Cookie.remove($config.auth.cookieName);
-      store.commit("auth/user", null);
-      return;
-    }
-
-    const idToken = user.getAuthResponse().id_token;
-    Cookie.set($config.auth.cookieName, idToken, {
-      expires: 1 / 24,
-      sameSite: "Lax",
-    });
-
-    try {
-      const response = await unWrap(await fetch("/api/user"));
-      const user = response.json;
-
-      store.commit("auth/user", {
-        fullName: user.name,
-        profileUrl: user.image,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   function signOut() {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut();
+    Cookie.remove($config.auth.cookieName);
+    store.commit("auth/user", null);
   }
 };

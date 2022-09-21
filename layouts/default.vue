@@ -28,7 +28,22 @@
         <template v-if="isLoggedIn">
           <img :src="user.profileUrl" alt="User avatar" class="avatar" title="Sign out" @click="$auth.signOut()" />
         </template>
-        <div v-show="!isLoggedIn" id="googleButton" class="ml-8"></div>
+        <div v-show="!isLoggedIn" id="googleButton" class="ml-8">
+          <div
+            id="g_id_onload"
+            :data-client_id="$config.auth.clientId"
+            data-auto_select="true"
+            data-callback="auth"
+          ></div>
+          <div
+            class="g_id_signin"
+            data-type="icon"
+            data-shape="circle"
+            data-theme="outline"
+            data-text="signin_with"
+            data-size="large"
+          ></div>
+        </div>
       </div>
     </header>
     <nuxt />
