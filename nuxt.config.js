@@ -33,7 +33,13 @@ export default {
     "~/plugins/stripe.client",
   ],
 
-  modules: ["~/modules/auth", "~/modules/algolia", "~/modules/cloudinary", "~/modules/stripe", "@nuxtjs/cloudinary"],
+  modules: [
+    "~/modules/auth",
+    "~/modules/algolia",
+    "~/modules/cloudinary",
+    "~/modules/stripe",
+    "@nuxtjs/cloudinary",
+  ],
 
   buildModules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
 
@@ -54,13 +60,20 @@ export default {
     loaders: {
       limit: 0,
     },
+    extend(config) {
+      config.resolve.alias["node-fetch-native"] = require.resolve("node-fetch");
+    },
   },
 
   publicRuntimeConfig: {
-    rootUrl: process.env.NODE_ENV === "production" ? "https://nuxtairbnb.vercel.app" : "http://localhost:3000",
+    rootUrl:
+      process.env.NODE_ENV === "production"
+        ? "https://nuxtairbnb.vercel.app"
+        : "http://localhost:3000",
     auth: {
       cookieName: "idToken",
-      clientId: "736761392411-pa0sqah7jpgdpsm34a3uk961q0rqbfld.apps.googleusercontent.com",
+      clientId:
+        "736761392411-pa0sqah7jpgdpsm34a3uk961q0rqbfld.apps.googleusercontent.com",
     },
     algolia: {
       appId: "HTQ6DUKPLH",
