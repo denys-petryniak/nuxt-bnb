@@ -1,7 +1,4 @@
 module.exports = {
-  future: {
-    purgeLayersByDefault: true,
-  },
   corePlugins: {
     animation: false,
     textOpacity: false,
