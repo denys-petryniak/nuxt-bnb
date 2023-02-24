@@ -31,6 +31,7 @@ export default {
     "~/plugins/auth.client",
     "~/plugins/vCalendar.client",
     "~/plugins/stripe.client",
+    "~/plugins/click-outside.client",
   ],
 
   modules: [

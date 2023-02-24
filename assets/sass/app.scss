@@ -2,7 +2,7 @@
 
 html,
 body {
-  @apply font-roboto;
+  @apply h-full font-roboto;
 }
 
 $cities: paris, new-york, london, dubai, san-francisco, cancun;
@@ -96,14 +96,30 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
   }
 
   &-user-menu {
-    @apply ml-auto flex items-center;
+    @apply relative ml-10 flex items-center;
 
     .name {
       @apply ml-2;
     }
 
     .avatar {
-      @apply w-12 h-12 rounded-full border-2 border-dodger-blue ml-10 cursor-pointer;
+      @apply w-12 h-12 shrink-0 rounded-full border-2 border-dodger-blue  cursor-pointer;
+    }
+
+    .drawer {
+      @apply min-w-[120px] z-10 flex flex-col items-center transition-opacity bg-gray-800 py-6 px-4 text-sm text-gray-100 rounded-md absolute left-1/2 top-[calc(100%_+_1rem)] -translate-x-1/2 opacity-0 mx-auto;
+      &.show {
+        @apply opacity-100;
+      }
+
+      > button,
+      > a {
+        @apply mx-auto px-4 py-2 shrink-0 font-semibold text-sm bg-dodger-blue text-white rounded-full shadow-sm;
+      }
+
+      > a {
+        @apply mb-4;
+      }
     }
   }
 
@@ -392,8 +408,13 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
   }
 
   &-error-page {
-    background-image: url(/images/illustrations/wave.svg), url(/images/illustrations/mountains.svg),
-      linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(157, 187, 215, 1) 100%);
+    background-image: url(/images/illustrations/wave.svg),
+      url(/images/illustrations/mountains.svg),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(157, 187, 215, 1) 100%
+      );
     background-position: center, bottom -82px center, center;
     background-size: cover, auto, cover;
     @apply bg-no-repeat flex items-center justify-center min-h-screen;

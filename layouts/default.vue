@@ -5,18 +5,36 @@
         <img src="/images/logo.svg" alt="Logo" />
       </nuxt-link>
       <div class="app-search">
-        <input type="text" ref="citySearch" @changed="changed" placeholder="Enter a city" />
+        <input
+          type="text"
+          ref="citySearch"
+          @changed="changed"
+          placeholder="Enter a city"
+        />
         <client-only>
           <template #placeholder>
             <input class="datepicker" />
             <span class="-ml-6 mr-2">to</span>
             <input class="datepicker" /><br />
           </template>
-          <date-picker v-model="range" is-range timezone="UTC" :modelConfig="{ timeAdjust: '00:00:00' }">
+          <date-picker
+            v-model="range"
+            is-range
+            timezone="UTC"
+            :modelConfig="{ timeAdjust: '00:00:00' }"
+          >
             <template v-slot="{ inputValue, inputEvents }">
-              <input :value="inputValue.start" v-on="inputEvents.start" class="datepicker" />
+              <input
+                :value="inputValue.start"
+                v-on="inputEvents.start"
+                class="datepicker"
+              />
               <span class="-ml-6 mr-2">to</span>
-              <input :value="inputValue.end" v-on="inputEvents.end" class="datepicker" /><br />
+              <input
+                :value="inputValue.end"
+                v-on="inputEvents.end"
+                class="datepicker"
+              /><br />
             </template>
           </date-picker>
         </client-only>
@@ -24,9 +42,18 @@
           <img src="/images/icons/search.svg" alt="Search icon" />
         </button>
       </div>
-      <div class="app-user-menu">
+      <div v-click-outside="hideDrawer" class="app-user-menu">
         <template v-if="isLoggedIn">
-          <img :src="user.profileUrl" alt="User avatar" class="avatar" title="Sign out" @click="$auth.signOut()" />
+          <img
+            :src="user.profileUrl"
+            alt="User avatar"
+            class="avatar"
+            @click="isShowDrawer = !isShowDrawer"
+          />
+          <div :class="['drawer', { show: isShowDrawer }]">
+            <router-link to="/admin">Admin</router-link>
+            <button type="button" @click="$auth.signOut()">Sign out</button>
+          </div>
         </template>
         <div v-show="!isLoggedIn" id="googleButton" class="ml-8">
           <div
@@ -63,6 +90,7 @@ export default {
         start: null,
         end: null,
       },
+      isShowDrawer: false,
     };
   },
 
@@ -73,6 +101,12 @@ export default {
 
     isLoggedIn() {
       return this.$store.state.auth.isLoggedIn;
+    },
+  },
+
+  watch: {
+    $route() {
+      this.hideDrawer();
     },
   },
 
@@ -104,6 +138,10 @@ export default {
       this.location.lat = place.geometry.location.lat();
       this.location.lng = place.geometry.location.lng();
       this.location.label = this.$refs.citySearch.value;
+    },
+
+    hideDrawer() {
+      this.isShowDrawer = false;
     },
   },
 };
