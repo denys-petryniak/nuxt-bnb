@@ -107,9 +107,9 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
     }
 
     .drawer {
-      @apply min-w-[120px] z-10 flex flex-col items-center transition-opacity bg-gray-800 py-6 px-4 text-sm text-gray-100 rounded-md absolute left-1/2 top-[calc(100%_+_1rem)] -translate-x-1/2 opacity-0 mx-auto;
+      @apply min-w-[120px] z-10 flex flex-col items-center transition-opacity bg-gray-800 py-6 px-4 text-sm text-gray-100 rounded-md absolute left-1/2 top-[calc(100%_+_1rem)] -translate-x-1/2 opacity-0 pointer-events-none mx-auto;
       &.show {
-        @apply opacity-100;
+        @apply opacity-100 pointer-events-auto;
       }
 
       > button,
