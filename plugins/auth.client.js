@@ -1,8 +1,8 @@
 import Cookie from "js-cookie";
 import jwt_decode from "jwt-decode";
 
-export default ({ $config, store }, inject) => {
-  window.auth = response => {
+export default ({ app, $config, store }, inject) => {
+  window.auth = (response) => {
     try {
       const token = response.credential;
       const user = jwt_decode(token);
@@ -34,5 +34,6 @@ export default ({ $config, store }, inject) => {
   function signOut() {
     Cookie.remove($config.auth.cookieName);
     store.commit("auth/user", null);
+    app.router.push({ path: "/" });
   }
 };
