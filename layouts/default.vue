@@ -51,7 +51,7 @@
             @click="isShowDrawer = !isShowDrawer"
           />
           <div :class="['drawer', { show: isShowDrawer }]">
-            <router-link to="/admin">Admin</router-link>
+            <router-link to="/admin">To Admin</router-link>
             <button type="button" @click="$auth.signOut()">Sign out</button>
           </div>
         </template>
@@ -107,6 +107,24 @@ export default {
   watch: {
     $route() {
       this.hideDrawer();
+    },
+
+    isLoggedIn(isLoggedInNew) {
+      const path = this.$route.path;
+      const isAdminRelatedPages = path.includes("admin");
+      const isNoAccessPage = path.includes("no-access");
+
+      const redirectToHome = () => {
+        this.$router.replace("/");
+      };
+
+      if (isAdminRelatedPages && !isLoggedInNew) {
+        redirectToHome();
+      }
+
+      if (isNoAccessPage && isLoggedInNew) {
+        redirectToHome();
+      }
     },
   },
 

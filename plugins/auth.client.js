@@ -34,6 +34,5 @@ export default ({ app, $config, store }, inject) => {
   function signOut() {
     Cookie.remove($config.auth.cookieName);
     store.commit("auth/user", null);
-    app.router.push({ path: "/" });
   }
 };
