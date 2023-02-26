@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <input type="file" accept=".jpeg,.jpg,image/jpeg" @change="uploadFile" />
+  <div class="mb-2">
+    <span class="sr-only">Choose profile photo</span>
+    <input
+      type="file"
+      accept=".jpeg,.jpg,image/jpeg"
+      @change="uploadFile"
+      class="block w-60 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+    />
   </div>
 </template>
 <script>
@@ -11,11 +17,7 @@ export default {
     async uploadFile(e) {
       const file = e.target.files[0];
       if (!file) return;
-      const filename =
-        file.name
-          .split(".")
-          .slice(0, -1)
-          .join(".") + Date.now();
+      const filename = file.name.split(".").slice(0, -1).join(".") + Date.now();
       const options = {
         timestamp: Date.now(),
         public_id: filename,
@@ -30,8 +32,8 @@ export default {
         })
       );
       const signature = response.json.signature;
-      const readData = fileObj =>
-        new Promise(resolve => {
+      const readData = (fileObj) =>
+        new Promise((resolve) => {
           const reader = new FileReader();
           reader.onloadend = () => resolve(reader.result);
           reader.readAsDataURL(fileObj);

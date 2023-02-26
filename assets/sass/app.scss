@@ -30,7 +30,7 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
   }
 
   &-header {
-    @apply flex items-center py-9 px-10;
+    @apply flex justify-center items-center py-9 px-10;
   }
 
   &-logo {
@@ -500,6 +500,33 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
       .app-map {
         @apply h-full;
       }
+    }
+  }
+
+  &-admin {
+    .form {
+      @apply max-w-104;
+
+      input:not([type="file"]),
+      textarea {
+        @apply p-1 m-1 bg-gray-200;
+      }
+
+      .label {
+        @apply block mb-2 text-east-bay text-xl font-medium;
+      }
+
+      .field {
+        @apply mb-4;
+      }
+    }
+
+    .delete-button {
+      @apply py-1 px-2 mr-2 text-sm bg-red-400 text-white rounded-lg shadow-xl;
+    }
+
+    .add-button {
+      @apply py-2 px-4 text-lg bg-dodger-blue text-white rounded-lg shadow-xl;
     }
   }
 }
