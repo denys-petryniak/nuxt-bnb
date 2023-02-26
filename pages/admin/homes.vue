@@ -11,22 +11,18 @@
           <ImageUploader @file-uploaded="imageUpdated($event, 3)" />
           <ImageUploader @file-uploaded="imageUpdated($event, 4)" />
         </div>
-
         <div class="field">
           <label class="label">Title:</label>
           <input type="text" v-model="home.title" class="w-full" />
         </div>
-
         <div class="field">
           <label class="label">Description:</label>
           <textarea v-model="home.description" class="w-full"></textarea>
         </div>
-
         <div class="field">
           <label class="label">Note:</label>
           <textarea v-model="home.note" class="w-full"></textarea>
         </div>
-
         <div class="field">
           <label class="label">Features:</label>
           <input type="text" v-model="home.features[0]" class="w-1/4" />
@@ -35,12 +31,10 @@
           <input type="text" v-model="home.features[3]" class="w-1/4" />
           <input type="text" v-model="home.features[4]" class="w-1/4" />
         </div>
-
         <div class="field">
           <label class="label">Price Per Night</label>
           <input type="number" v-model="home.pricePerNight" class="w-14" />
         </div>
-
         <div class="field">
           <label class="label">Guests / Rooms / Beds / Baths</label>
           <input type="number" v-model="home.guests" class="w-14" />
@@ -48,7 +42,6 @@
           <input type="number" v-model="home.beds" class="w-14" />
           <input type="number" v-model="home.bathrooms" class="w-14" /><br />
         </div>
-
         <div class="field">
           <label class="label">Location:</label>
           <input
@@ -60,22 +53,18 @@
             @changed="changed"
           />
         </div>
-
         <div class="field">
           <label class="label">Address:</label>
           <input type="text" v-model="home.location.address" class="w-full" />
         </div>
-
         <div class="field">
           <label class="label">City:</label>
           <input type="text" v-model="home.location.city" class="w-full" />
         </div>
-
         <div class="field">
           <label class="label">State:</label>
           <input type="text" v-model="home.location.state" class="w-full" />
         </div>
-
         <div class="field">
           <label class="label">Postal code:</label>
           <input
@@ -84,12 +73,10 @@
             class="w-full"
           />
         </div>
-
         <div class="field">
           <label class="label">Country:</label>
           <input type="text" v-model="home.location.country" class="w-full" />
         </div>
-
         <div class="field">
           <label class="label">Date:</label>
           <date-picker
@@ -115,7 +102,6 @@
             </template>
           </date-picker>
         </div>
-
         <button class="add-button">Add</button>
       </form>
     </div>
