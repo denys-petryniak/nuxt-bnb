@@ -6,9 +6,19 @@
           <h2>Recently Added</h2>
         </div>
         <div class="app-carousel-items">
-          <nuxt-link :to="`/home/${home.objectID}/`" v-for="(home, index) in homes" :key="index" class="app-house">
+          <nuxt-link
+            v-for="(home, index) in homes"
+            :key="index"
+            :to="`/home/${home.objectID}/`"
+            class="app-house"
+          >
             <div class="app-house-header">
-              <nuxt-img :src="home.images[0]" width="360" height="175" provider="cloudinary" />
+              <nuxt-img
+                :src="home.images[0]"
+                width="360"
+                height="175"
+                provider="cloudinary"
+              />
             </div>
             <div class="app-house-body">
               <div class="app-rating">
@@ -40,8 +50,8 @@ export default {
   props: {
     homes: {
       type: Array,
-      default: [],
+      default: () => [],
     },
   },
-};
+}
 </script>

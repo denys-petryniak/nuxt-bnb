@@ -6,10 +6,10 @@
       </nuxt-link>
       <div class="app-search">
         <input
-          type="text"
           ref="citySearch"
-          @changed="changed"
+          type="text"
           placeholder="Enter a city"
+          @changed="changed"
         />
         <client-only>
           <template #placeholder>
@@ -21,19 +21,19 @@
             v-model="range"
             is-range
             timezone="UTC"
-            :modelConfig="{ timeAdjust: '00:00:00' }"
+            :model-config="{ timeAdjust: '00:00:00' }"
           >
-            <template v-slot="{ inputValue, inputEvents }">
+            <template #default="{ inputValue, inputEvents }">
               <input
                 :value="inputValue.start"
-                v-on="inputEvents.start"
                 class="datepicker"
+                v-on="inputEvents.start"
               />
               <span class="-ml-6 mr-2">to</span>
               <input
                 :value="inputValue.end"
-                v-on="inputEvents.end"
                 class="datepicker"
+                v-on="inputEvents.end"
               /><br />
             </template>
           </date-picker>
@@ -84,83 +84,83 @@ export default {
       location: {
         lat: 0,
         lng: 0,
-        label: "",
+        label: '',
       },
       range: {
         start: null,
         end: null,
       },
       isShowDrawer: false,
-    };
+    }
   },
 
   computed: {
     user() {
-      return this.$store.state.auth.user;
+      return this.$store.state.auth.user
     },
 
     isLoggedIn() {
-      return this.$store.state.auth.isLoggedIn;
+      return this.$store.state.auth.isLoggedIn
     },
   },
 
   watch: {
     $route() {
-      this.hideDrawer();
+      this.hideDrawer()
     },
 
     isLoggedIn(isLoggedInNew) {
-      const path = this.$route.path;
-      const isAdminRelatedPages = path.includes("admin");
-      const isNoAccessPage = path.includes("no-access");
+      const path = this.$route.path
+      const isAdminRelatedPages = path.includes('admin')
+      const isNoAccessPage = path.includes('no-access')
 
       const redirectToHome = () => {
-        this.$router.replace("/");
-      };
+        this.$router.replace('/')
+      }
 
       if (isAdminRelatedPages && !isLoggedInNew) {
-        redirectToHome();
+        redirectToHome()
       }
 
       if (isNoAccessPage && isLoggedInNew) {
-        redirectToHome();
+        redirectToHome()
       }
     },
   },
 
   mounted() {
-    this.$maps.makeAutoComplete(this.$refs.citySearch);
+    this.$maps.makeAutoComplete(this.$refs.citySearch)
   },
 
   methods: {
     search() {
-      if (!this.location.label || !this.range.start || !this.range.end) return;
+      if (!this.location.label || !this.range.start || !this.range.end) return
 
       this.$router.push({
-        name: "search",
+        name: 'search',
         query: {
           ...this.location,
           start: this.range.start.getTime() / 1000,
           end: this.range.end.getTime() / 1000,
         },
-      });
+      })
     },
 
     changed(event) {
-      const place = event.detail;
+      const place = event.detail
 
       if (!place.geometry) {
-        return;
+        return
       }
 
-      this.location.lat = place.geometry.location.lat();
-      this.location.lng = place.geometry.location.lng();
-      this.location.label = this.$refs.citySearch.value;
+      this.location.lat = place.geometry.location.lat()
+      this.location.lng = place.geometry.location.lng()
+      this.location.label = this.$refs.citySearch.value
     },
 
     hideDrawer() {
-      this.isShowDrawer = false;
+      this.isShowDrawer = false
     },
   },
-};
+}
 </script>

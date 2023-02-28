@@ -1,13 +1,13 @@
 export async function unWrap(response) {
-  const json = await response.json();
-  const { ok, status, statusText } = response;
+  const json = await response.json()
+  const { ok, status, statusText } = response
 
   return {
     json,
     ok,
     status,
     statusText,
-  };
+  }
 }
 
 export function getErrorResponse(error) {
@@ -16,5 +16,5 @@ export function getErrorResponse(error) {
     status: 500,
     statusText: error.message,
     json: {},
-  };
+  }
 }

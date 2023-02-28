@@ -1,31 +1,42 @@
 {
-    "name": "nuxt-bnb",
-    "scripts": {
-        "dev": "nuxt",
-        "build": "nuxt build",
-        "generate": "nuxt generate",
-        "start": "nuxt start"
-    },
-    "dependencies": {
-        "@nuxtjs/cloudinary": "^1.0.3",
-        "body-parser": "^1.19.1",
-        "cloudinary-vue": "^1.1.2",
-        "cookie": "^0.4.1",
-        "google-auth-library": "^7.11.0",
-        "js-cookie": "^3.0.1",
-        "jwt-decode": "^3.1.2",
-        "nuxt": "^2.16.0",
-        "stripe": "^8.204.0",
-        "uuid": "^8.3.2",
-        "v-calendar": "^2.4.1"
-    },
-    "devDependencies": {
-        "@nuxt/image": "^0.6.2",
-        "@nuxtjs/tailwindcss": "^6.4.1",
-        "sass": "^1.45.0",
-        "sass-loader": "^10.2.0"
-    },
-    "engines": {
-        "node": "14.x"
-    }
+  "name": "nuxt-bnb",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix"
+  },
+  "dependencies": {
+    "@nuxtjs/cloudinary": "^1.0.3",
+    "body-parser": "^1.19.1",
+    "cloudinary-vue": "^1.1.2",
+    "cookie": "^0.4.1",
+    "google-auth-library": "^7.11.0",
+    "js-cookie": "^3.0.1",
+    "jwt-decode": "^3.1.2",
+    "nuxt": "^2.16.0",
+    "stripe": "^8.204.0",
+    "uuid": "^8.3.2",
+    "v-calendar": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@nuxt/image": "^0.6.2",
+    "@nuxtjs/eslint-config": "^12.0.0",
+    "@nuxtjs/eslint-module": "^3.1.0",
+    "@nuxtjs/tailwindcss": "^6.4.1",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "prettier": "^2.8.4",
+    "sass": "^1.45.0",
+    "sass-loader": "^10.2.0"
+  },
+  "engines": {
+    "node": "14.x"
+  }
 }

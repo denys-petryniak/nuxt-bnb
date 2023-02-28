@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 html,
 body {
@@ -507,7 +507,7 @@ $cities: paris, new-york, london, dubai, san-francisco, cancun;
     .form {
       @apply max-w-104;
 
-      input:not([type="file"]),
+      input:not([type='file']),
       textarea {
         @apply p-1 m-1 bg-gray-200;
       }

@@ -1,31 +1,31 @@
-import cookie from "cookie";
-import { OAuth2Client } from "google-auth-library";
+import cookie from 'cookie'
+import { OAuth2Client } from 'google-auth-library'
 
 export default function () {
-  const authConfig = this.options.publicRuntimeConfig.auth;
+  const authConfig = this.options.publicRuntimeConfig.auth
 
-  this.nuxt.hook("render:setupMiddleware", app => {
-    app.use("/api", handler);
-  });
+  this.nuxt.hook('render:setupMiddleware', (app) => {
+    app.use('/api', handler)
+  })
 
-  this.nuxt.hook("render:setupMiddleware", app => {
-    app.use("/admin", (req, res, next) => {
-      res.spa = true;
-      next();
-    });
-  });
+  this.nuxt.hook('render:setupMiddleware', (app) => {
+    app.use('/admin', (req, res, next) => {
+      res.spa = true
+      next()
+    })
+  })
 
   async function handler(req, res, next) {
-    const idToken = cookie.parse(req.headers.cookie)[authConfig.cookieName];
+    const idToken = cookie.parse(req.headers.cookie)[authConfig.cookieName]
 
     if (!idToken) {
-      return rejectHit(res);
+      return rejectHit(res)
     }
 
-    const ticket = await getUser(idToken);
+    const ticket = await getUser(idToken)
 
     if (!ticket) {
-      return rejectHit(res);
+      return rejectHit(res)
     }
 
     req.identity = {
@@ -33,28 +33,29 @@ export default function () {
       email: ticket.email,
       name: ticket.name,
       image: ticket.picture,
-    };
+    }
 
-    next();
+    next()
   }
 
   async function getUser(idToken) {
-    const client = new OAuth2Client(authConfig.clientID);
+    const client = new OAuth2Client(authConfig.clientID)
 
     try {
       const ticket = await client.verifyIdToken({
         idToken,
         audience: authConfig.clientID,
-      });
+      })
 
-      return ticket.getPayload();
+      return ticket.getPayload()
     } catch (error) {
-      console.error(error);
+      // eslint-disable-next-line no-console
+      console.error(error)
     }
   }
 
   function rejectHit(res) {
-    res.statusCode = 401;
-    res.end();
+    res.statusCode = 401
+    res.end()
   }
 }

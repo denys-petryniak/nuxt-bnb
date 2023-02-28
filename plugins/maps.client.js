@@ -1,52 +1,52 @@
 export default (_, inject) => {
-  window.initGoogleMaps = init;
+  window.initGoogleMaps = init
 
-  let isLoaded = false;
-  let waiting = [];
+  let isLoaded = false
+  let waiting = []
 
-  addScript();
-  inject("maps", {
+  addScript()
+  inject('maps', {
     showMap,
     makeAutoComplete,
-  });
+  })
 
   function addScript() {
-    const script = document.createElement("script");
+    const script = document.createElement('script')
     script.src =
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjQkj7VxkH8KtsmTl4MVoTva7TqnM6NUo&libraries=places&callback=initGoogleMaps";
-    script.async = true;
-    document.head.appendChild(script);
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyBjQkj7VxkH8KtsmTl4MVoTva7TqnM6NUo&libraries=places&callback=initGoogleMaps'
+    script.async = true
+    document.head.appendChild(script)
   }
 
   function init() {
-    isLoaded = true;
+    isLoaded = true
 
-    waiting.forEach(item => {
-      if (typeof item.fn === "function") {
-        item.fn(...item.arguments);
+    waiting.forEach((item) => {
+      if (typeof item.fn === 'function') {
+        item.fn(...item.arguments)
       }
-    });
+    })
 
-    waiting = [];
+    waiting = []
   }
 
-  function makeAutoComplete(input, types = ["(cities)"]) {
+  function makeAutoComplete(input, types = ['(cities)']) {
     if (!isLoaded) {
       waiting.push({
         fn: makeAutoComplete,
         arguments,
-      });
+      })
 
-      return;
+      return
     }
 
     const autoComplete = new window.google.maps.places.Autocomplete(input, {
       types,
-    });
-    autoComplete.addListener("place_changed", () => {
-      const place = autoComplete.getPlace();
-      input.dispatchEvent(new CustomEvent("changed", { detail: place }));
-    });
+    })
+    autoComplete.addListener('place_changed', () => {
+      const place = autoComplete.getPlace()
+      input.dispatchEvent(new CustomEvent('changed', { detail: place }))
+    })
   }
 
   function showMap(canvas, lat, lng, markers) {
@@ -54,9 +54,9 @@ export default (_, inject) => {
       waiting.push({
         fn: showMap,
         arguments,
-      });
+      })
 
-      return;
+      return
     }
 
     const mapOptions = {
@@ -66,47 +66,47 @@ export default (_, inject) => {
       zoomControl: true,
       styles: [
         {
-          featureType: "poi.business",
-          elementType: "labels.icon",
+          featureType: 'poi.business',
+          elementType: 'labels.icon',
           stylers: [
             {
-              visibility: "off",
+              visibility: 'off',
             },
           ],
         },
       ],
-    };
+    }
 
-    const map = new window.google.maps.Map(canvas, mapOptions);
+    const map = new window.google.maps.Map(canvas, mapOptions)
 
     if (!markers) {
-      const position = new window.google.maps.LatLng(lat, lng);
+      const position = new window.google.maps.LatLng(lat, lng)
       const marker = new window.google.maps.Marker({
         position,
         clickable: false,
-      });
+      })
 
-      marker.setMap(map);
-      return;
+      marker.setMap(map)
+      return
     }
 
-    const bounds = new window.google.maps.LatLngBounds();
-    markers.forEach(home => {
-      const position = new window.google.maps.LatLng(home.lat, home.lng);
+    const bounds = new window.google.maps.LatLngBounds()
+    markers.forEach((home) => {
+      const position = new window.google.maps.LatLng(home.lat, home.lng)
       const marker = new window.google.maps.Marker({
         position,
         label: {
           text: `$${home.pricePerNight}`,
           className: `marker home-${home.id}`,
         },
-        icon: "https://maps.gstatic.com/mapfiles/transparent.png",
+        icon: 'https://maps.gstatic.com/mapfiles/transparent.png',
         clickable: false,
-      });
+      })
 
-      marker.setMap(map);
-      bounds.extend(position);
-    });
+      marker.setMap(map)
+      bounds.extend(position)
+    })
 
-    map.fitBounds(bounds);
+    map.fitBounds(bounds)
   }
-};
+}

@@ -7,7 +7,9 @@
           <div class="app-host-name">
             {{ user.name }}
           </div>
-          <div class="app-host-date">Joined in {{ shortDate(user.joined) }}</div>
+          <div class="app-host-date">
+            Joined in {{ shortDate(user.joined) }}
+          </div>
           <div class="app-flex">
             <div class="app-host-reviews">{{ user.reviewCount }} reviews</div>
           </div>
@@ -21,7 +23,7 @@
 </template>
 
 <script>
-import shortDate from "~/utils/shortDate";
+import shortDate from '~/utils/shortDate'
 
 export default {
   props: {
@@ -34,5 +36,5 @@ export default {
   methods: {
     shortDate,
   },
-};
+}
 </script>

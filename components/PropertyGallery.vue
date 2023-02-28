@@ -29,10 +29,10 @@ export default {
           width: 600,
         },
         {
-          provider: "cloudinary",
+          provider: 'cloudinary',
         }
-      );
+      )
     },
   },
-};
+}
 </script>

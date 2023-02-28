@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center;">
+  <div style="text-align: center">
     <img
       src="https://image.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg"
       alt=""
@@ -11,17 +11,16 @@
 
 <script>
 export default {
-  head() {
-    return {
-      title: "BIG PROBLEMS",
-    };
-  },
-
   props: {
     error: {
       type: Object,
       required: true,
     },
   },
-};
+  head() {
+    return {
+      title: 'BIG PROBLEMS',
+    }
+  },
+}
 </script>

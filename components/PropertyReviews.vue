@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import shortDate from "~/utils/shortDate";
+import shortDate from '~/utils/shortDate'
 
 export default {
   props: {
@@ -37,5 +37,5 @@ export default {
   methods: {
     shortDate,
   },
-};
+}
 </script>

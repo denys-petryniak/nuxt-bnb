@@ -1,79 +1,91 @@
-import fetch from "node-fetch";
-import { unWrap, getErrorResponse } from "../../../utils/fetchUtils";
-import { getHeaders } from "../../helpers";
+import fetch from 'node-fetch'
+import { unWrap, getErrorResponse } from '../../../utils/fetchUtils'
+import { getHeaders } from '../../helpers'
 
-export default algoliaConfig => {
-  const headers = getHeaders(algoliaConfig);
+export default (algoliaConfig) => {
+  const headers = getHeaders(algoliaConfig)
 
   return {
-    get: async homeId => {
+    get: async (homeId) => {
       try {
         return unWrap(
-          await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`, {
-            headers,
-          })
-        );
+          await fetch(
+            `https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
+            {
+              headers,
+            }
+          )
+        )
       } catch (error) {
-        return getErrorResponse(error);
+        return getErrorResponse(error)
       }
     },
 
-    delete: async homeId => {
+    delete: async (homeId) => {
       try {
         return unWrap(
-          await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`, {
-            headers,
-            method: "DELETE",
-          })
-        );
+          await fetch(
+            `https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
+            {
+              headers,
+              method: 'DELETE',
+            }
+          )
+        )
       } catch (error) {
-        return getErrorResponse(error);
+        return getErrorResponse(error)
       }
     },
 
     create: async (homeId, payload) => {
       try {
-        const availability = [];
-        payload.availabilityRanges.forEach(range => {
-          const start = new Date(range.start).getTime() / 1000;
-          const end = new Date(range.end).getTime() / 1000;
+        const availability = []
+        payload.availabilityRanges.forEach((range) => {
+          const start = new Date(range.start).getTime() / 1000
+          const end = new Date(range.end).getTime() / 1000
 
           for (let day = start; day <= end; day += 86400) {
-            availability.push(day);
+            availability.push(day)
           }
-        });
+        })
 
-        delete payload.availabilityRanges;
-        payload.availability = availability;
+        delete payload.availabilityRanges
+        payload.availability = availability
 
         return unWrap(
-          await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`, {
-            headers,
-            method: "PUT",
-            body: JSON.stringify(payload),
-          })
-        );
+          await fetch(
+            `https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
+            {
+              headers,
+              method: 'PUT',
+              body: JSON.stringify(payload),
+            }
+          )
+        )
       } catch (error) {
-        return getErrorResponse(error);
+        return getErrorResponse(error)
       }
     },
 
-    getByUserId: async userId => {
+    getByUserId: async (userId) => {
       try {
         return unWrap(
-          await fetch(`https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/query`, {
-            headers,
-            method: "POST",
-            body: JSON.stringify({
-              filters: `userId:${userId}`,
-              attributesToRetrieve: ["objectId", "title"],
-              attributesToHighlight: [],
-            }),
-          })
-        );
+          await fetch(
+            `https://${algoliaConfig.appId}-dsn.algolia.net/1/indexes/homes/query`,
+            {
+              headers,
+              method: 'POST',
+              body: JSON.stringify({
+                filters: `userId:${userId}`,
+                attributesToRetrieve: ['objectId', 'title'],
+                attributesToHighlight: [],
+              }),
+            }
+          )
+        )
       } catch (error) {
-        return getErrorResponse(error);
+        return getErrorResponse(error)
       }
     },
-  };
-};
+  }
+}

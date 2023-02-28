@@ -3,7 +3,3 @@
     <p class="app-subtitle">No Access! Log in!</p>
   </div>
 </template>
-
-<script>
-export default {};
-</script>

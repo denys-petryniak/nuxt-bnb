@@ -3,7 +3,11 @@
     <div class="app-search-results">
       <div class="app-search-results-listing">
         <h2 class="app-title">Stays in {{ label }}</h2>
-        <nuxt-link v-for="home in homes" :key="home.objectID" :to="`/home/${home.objectID}`">
+        <nuxt-link
+          v-for="home in homes"
+          :key="home.objectID"
+          :to="`/home/${home.objectID}`"
+        >
           <HomeRow
             class="app-house"
             :home="home"
@@ -14,7 +18,7 @@
         <div v-if="homes.length === 0">No homes found, try another city.</div>
       </div>
       <div class="app-search-results-map">
-        <div class="app-map" ref="map"></div>
+        <div ref="map" class="app-map"></div>
       </div>
     </div>
   </div>
@@ -22,63 +26,80 @@
 
 <script>
 export default {
-  head() {
-    return {
-      title: `Homes around ${this.label}`,
-    };
-  },
-
   async beforeRouteUpdate(to, from, next) {
-    const data = await this.$dataApi.getHomesByLocation(to.query.lat, to.query.lng, to.query.start, to.query.end);
+    const data = await this.$dataApi.getHomesByLocation(
+      to.query.lat,
+      to.query.lng,
+      to.query.start,
+      to.query.end
+    )
 
-    this.homes = data.json.hits;
-    this.label = to.query.label;
-    this.lat = to.query.lat;
-    this.lng = to.query.lng;
+    this.homes = data.json.hits
+    this.label = to.query.label
+    this.lat = to.query.lat
+    this.lng = to.query.lng
 
-    this.updateMap();
-    next();
+    this.updateMap()
+    next()
   },
 
   async asyncData({ query, $dataApi }) {
-    const data = await $dataApi.getHomesByLocation(query.lat, query.lng, query.start, query.end);
+    const data = await $dataApi.getHomesByLocation(
+      query.lat,
+      query.lng,
+      query.start,
+      query.end
+    )
 
     return {
       homes: data.json.hits,
       label: query.label,
       lat: query.lat,
       lng: query.lng,
-    };
+    }
+  },
+
+  head() {
+    return {
+      title: `Homes around ${this.label}`,
+    }
   },
 
   mounted() {
-    this.updateMap();
+    this.updateMap()
   },
 
   methods: {
     updateMap() {
-      this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers());
+      this.$maps.showMap(
+        this.$refs.map,
+        this.lat,
+        this.lng,
+        this.getHomeMarkers()
+      )
     },
 
     getHomeMarkers() {
-      if (this.homes.length == 0) {
-        return null;
+      if (this.homes.length === 0) {
+        return null
       }
 
-      return this.homes.map(home => {
+      return this.homes.map((home) => {
         return {
           ...home._geoloc,
           pricePerNight: home.pricePerNight,
           id: home.objectID,
-        };
-      });
+        }
+      })
     },
 
     highlightMarker(homeId, isHighlighted) {
-      document.getElementsByClassName(`home-${homeId}`)[0]?.classList?.toggle("marker-highlight", isHighlighted);
+      document
+        .getElementsByClassName(`home-${homeId}`)[0]
+        ?.classList?.toggle('marker-highlight', isHighlighted)
     },
   },
-};
+}
 </script>
 
 <style>

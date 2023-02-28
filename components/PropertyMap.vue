@@ -23,7 +23,11 @@ export default {
   },
 
   mounted() {
-    this.$maps.showMap(this.$refs.map, this.home._geoloc.lat, this.home._geoloc.lng);
+    this.$maps.showMap(
+      this.$refs.map,
+      this.home._geoloc.lat,
+      this.home._geoloc.lng
+    )
   },
-};
+}
 </script>
