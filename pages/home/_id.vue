@@ -6,7 +6,6 @@
     <PropertyMap :home="home" />
     <PropertyReviews :reviews="reviews" />
     <PropertyHost :user="user" />
-    <script type="application/ld+json" v-html="getSchema"></script>
   </div>
 </template>
 
@@ -61,6 +60,13 @@ export default {
         },
         { hid: 't-type', name: 'twitter:card', content: 'summary_large_image' },
       ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: this.getSchema,
+        },
+      ],
+      __dangerouslyDisableSanitizers: ['script'], // <- this is important
     }
   },
 
