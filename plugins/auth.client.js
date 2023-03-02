@@ -21,7 +21,9 @@ export default ({ app, $config, store }, inject) => {
       console.log(`JWT Error ${e}`)
     }
   }
+
   addScript()
+
   inject('auth', {
     signOut,
   })

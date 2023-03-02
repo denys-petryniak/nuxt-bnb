@@ -168,6 +168,20 @@ export default {
   },
 
   methods: {
+    clearForm() {
+      for (const prop in this.home) {
+        if (Array.isArray(this.home[prop])) {
+          this.home[prop] = []
+        } else if (typeof this.home[prop] === 'object') {
+          for (const subProp in this.home[prop]) {
+            this.home[prop][subProp] = ''
+          }
+        } else {
+          this.home[prop] = ''
+        }
+      }
+    },
+
     async deleteHome(homeId) {
       await fetch(`/api/homes/${homeId}`, {
         method: 'DELETE',
@@ -195,6 +209,8 @@ export default {
         title: this.home.title,
         objectID: response.json.homeId,
       })
+
+      this.clearForm()
     },
 
     imageUpdated(imageUrl, index) {

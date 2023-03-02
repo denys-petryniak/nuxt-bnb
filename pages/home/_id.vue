@@ -4,7 +4,7 @@
     <PropertyDetails :home="home" />
     <PropertyDescription :home="home" />
     <PropertyMap :home="home" />
-    <PropertyReviews :reviews="reviews" />
+    <PropertyReviews v-if="reviews.length" :reviews="reviews" />
     <PropertyHost :user="user" />
   </div>
 </template>
