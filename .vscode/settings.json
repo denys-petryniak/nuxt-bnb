@@ -1,9 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    // Runs Prettier, then ESLint
-    "source.formatDocument": true,
-    "source.fixAll.eslint": true
+    "source.formatDocument": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "files.associations": {
     "*.scss": "postcss"
